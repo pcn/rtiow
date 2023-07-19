@@ -1,5 +1,6 @@
-mod color;
 mod vec3;
+
+use vec3::{ColorDisplay, Vec3};
 
 const IMAGE_WIDTH: i32 = 256;
 const IMAGE_HEIGHT: i32 = 256;
@@ -9,17 +10,13 @@ fn main() {
     for j in (0..IMAGE_HEIGHT).rev() {
         eprintln!("\rScanlines remaining: {}", j);
         for i in 0..IMAGE_WIDTH {
-            let r = i as f32 / (IMAGE_WIDTH as f32 - 1.0);
-            let g = j as f32 / (IMAGE_HEIGHT as f32 - 1.0);
-            let b = 0.25;
-
-            println!(
-                "{} {} {}",
-                (r * 255.999) as i32,
-                (g * 255.999) as i32,
-                (b * 255.999) as i32
+            let c = Vec3::new(
+                i as f64 / (IMAGE_WIDTH - 1) as f64,
+                j as f64 / (IMAGE_HEIGHT - 1) as f64,
+                0.25,
             );
+            c.pixel_color();
         }
     }
-    eprintln!("\nDone");
+    println!("\nDone");
 }
