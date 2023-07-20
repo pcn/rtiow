@@ -7,9 +7,9 @@ use std::fmt;
 
 #[derive(PartialEq, Clone, Copy)]
 pub struct Vec3 {
-    x: f64,
-    y: f64,
-    z: f64,
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
 }
 
 pub type Point3 = Vec3;
@@ -147,15 +147,11 @@ impl Mul for Vec3 {
     }
 }
 
-fn dot(lhs: Vec3, rhs: Vec3) -> Vec3 {
-    Vec3 {
-        x: lhs.x * rhs.x,
-        y: lhs.y * rhs.y,
-        z: lhs.z * lhs.z,
-    }
+pub fn dot(lhs: Vec3, rhs: Vec3) -> f64 {
+    lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * lhs.z
 }
 
-fn cross(lhs: Vec3, rhs: Vec3) -> Vec3 {
+pub fn cross(lhs: Vec3, rhs: Vec3) -> Vec3 {
     Vec3 {
         x: (lhs.y * rhs.z) - (lhs.z * rhs.y),
         y: (lhs.z * rhs.x) - (lhs.x * rhs.z),
@@ -163,7 +159,7 @@ fn cross(lhs: Vec3, rhs: Vec3) -> Vec3 {
     }
 }
 
-fn unit_vector(v: Vec3) -> Vec3 {
+pub fn unit_vector(v: Vec3) -> Vec3 {
     v.clone() / v.length()
 }
 

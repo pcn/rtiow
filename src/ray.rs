@@ -1,19 +1,16 @@
 use crate::vec3::{Point3, Vec3};
 
 pub struct Ray {
-    orig: Point3,
-    dir: Vec3,
+    pub origin: Point3,
+    pub direction: Vec3, // In the source, the accessor method is direction, the var members name is dir, but let's just use direction everywhere.
 }
 
 impl Ray {
-    fn new(point3: Point3, direction: Vec3) -> Self {
-        Self {
-            orig: point3,
-            dir: direction,
-        }
+    pub fn new(origin: Point3, direction: Vec3) -> Self {
+        Self { origin, direction }
     }
 
-    fn at(&self, t: f64) -> Point3 {
-        self.orig + (t * self.dir)
+    pub fn at(&self, t: f64) -> Point3 {
+        self.origin + (t * self.direction)
     }
 }
