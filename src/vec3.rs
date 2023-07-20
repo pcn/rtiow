@@ -5,7 +5,7 @@ use std::fmt;
 
 // Section 3.1
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Copy)]
 pub struct Vec3 {
     x: f64,
     y: f64,
@@ -53,6 +53,13 @@ impl Mul<f64> for Vec3 {
             y: self.y * rhs,
             z: self.z * rhs,
         }
+    }
+}
+
+impl Mul<Vec3> for f64 {
+    type Output = Vec3;
+    fn mul(self, rhs: Vec3) -> Vec3 {
+        rhs * self
     }
 }
 

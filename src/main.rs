@@ -1,3 +1,4 @@
+mod ray;
 mod vec3;
 
 use vec3::{ColorDisplay, Vec3};
