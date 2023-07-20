@@ -172,6 +172,9 @@ pub trait ColorDisplay {
 impl ColorDisplay for Vec3 {
     fn pixel_color(&self) {
         // Write the translated [0,255] value of each color component
+        // I'm not clear that I can use println here - I should
+        // probably work on how to get this to format somehow?
+
         println!(
             "{} {} {}",
             (self.x * 255.999) as i32,
