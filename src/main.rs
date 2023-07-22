@@ -3,6 +3,7 @@ extern crate nalgebra as na; //
 
 use na::{Point3, Vector3};
 
+mod hit;
 mod ray;
 
 // use std::mem::Discriminant;
