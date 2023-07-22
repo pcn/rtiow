@@ -45,11 +45,6 @@ fn length_squared(v: Vector3<f32>) -> f32 {
     v.x * v.x + v.y * v.y + v.z * v.z
 }
 
-// This was a bug
-fn dot(lhs: Vector3<f32>, rhs: Vector3<f32>) -> f32 {
-    lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * lhs.z
-}
-
 fn unit_vector(v: Vector3<f32>) -> Vector3<f32> {
     v.clone() / length(v)
 }
