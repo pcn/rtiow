@@ -14,7 +14,7 @@ type Color = Vector3<f32>;
 fn hit_sphere(center: Point3<f32>, radius: f32, r: &Ray) -> f32 {
     let oc = r.origin - center;
     let a = length_squared(r.direction);
-    let half_b = dot(oc, r.direction);
+    let half_b = oc.dot(&r.direction);
     let c = length_squared(oc) - radius * radius;
     let discriminant = half_b * half_b - a * c;
 
@@ -45,6 +45,7 @@ fn length_squared(v: Vector3<f32>) -> f32 {
     v.x * v.x + v.y * v.y + v.z * v.z
 }
 
+// This was a bug
 fn dot(lhs: Vector3<f32>, rhs: Vector3<f32>) -> f32 {
     lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * lhs.z
 }
