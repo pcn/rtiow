@@ -7,6 +7,7 @@ pub struct HitRecord {
     pub p: Point3<f32>,
     pub normal: Vector3<f32>,
     pub t: f32,
+    pub front_face: bool,
 }
 
 // pub impl HitRecord {
@@ -43,7 +44,20 @@ impl Sphere {
         rec.t = root;
         rec.p = Point3::from(r.at(rec.t));
         rec.normal = (rec.p - self.center) / self.radius;
+        let outward_normal = (rec.p - self.center) / self.radius;
+        rec.set_face_normal(r, &outward_normal);
 
         true
+    }
+}
+
+impl HitRecord {
+    pub fn set_face_normal(&mut self, r: &Ray, outward_normal: &Vector3<f32>) {
+        let front_face = r.direction.dot(outward_normal) < 0.0;
+        *self.normal = if front_face {
+            **outward_normal
+        } else {
+            *(-*outward_normal)
+        };
     }
 }
