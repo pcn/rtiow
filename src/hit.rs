@@ -14,6 +14,10 @@ pub struct HitRecord {
 //     pub fn hit(r: &Ray, t_min: f32, t_max: f32, rec: &hitHrecord) -> bool;
 // }
 
+pub struct HittableRecords {
+    pub hittables: Vec<HitRecord>,
+}
+
 pub struct Sphere {
     pub center: Point3<f32>,
     pub radius: f32,
@@ -59,5 +63,27 @@ impl HitRecord {
         } else {
             *(-*outward_normal)
         };
+    }
+}
+
+impl HittableRecords {
+    pub fn hit(&self, r: &Ray, t_min: f32, t_max: f32, rec: &HitRecord) -> Option<HitRecord> {
+        let mut temp_rec: HitRecord;
+        let mut hit_anything = false;
+        let mut closest_so_far = t_max;
+
+        // In the original, rec is only being passed in so it can be mofidified.
+        // It also gets overridden
+        self.hittables.iter().for_each(|h| {
+            if h.hit(r, t_min, closest_so_far, temp_rec) {
+                hit_anything = true;
+                closest_so_far = temp_rec.t;
+            }
+        });
+        if temp_rec {
+            rec = temp_rec;
+        }
+        hit_anything // I think this should return the temp_rec and hit_anything
+                     // (wrapped in an option)
     }
 }
